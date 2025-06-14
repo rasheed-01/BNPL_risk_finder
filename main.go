@@ -1,3 +1,4 @@
+// main.go (Go Backend)
 package main
 
 import (
@@ -16,9 +17,10 @@ type BNPLRequest struct {
 }
 
 type RiskResponse struct {
-	Score    int    `json:"score"`
-	Grade    string `json:"grade"`
-	Decision string `json:"decision"`
+	Score       int    `json:"score"`
+	Grade       string `json:"grade"`
+	Decision    string `json:"decision"`
+	Explanation string `json:"explanation"`
 }
 
 func main() {

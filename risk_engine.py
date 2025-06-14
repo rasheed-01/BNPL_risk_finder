@@ -4,20 +4,31 @@ app = Flask(__name__)
 
 def calculate_risk_score(purchase_amount, past_fraud_reports, social_score):
     score = 0
+    explanation_parts = []
 
     if purchase_amount > 1000:
         score += 40
+        explanation_parts.append("High purchase amount increased the risk significantly.")
     elif purchase_amount > 500:
         score += 25
+        explanation_parts.append("Moderately high purchase amount increased the risk.")
     else:
         score += 10
+        explanation_parts.append("Low purchase amount had minimal impact on risk.")
 
-    score += past_fraud_reports * 20
+    if past_fraud_reports > 0:
+        fraud_score = past_fraud_reports * 20
+        score += fraud_score
+        explanation_parts.append(f"{past_fraud_reports} past fraud report(s) added significant risk.")
 
     if social_score > 80:
         score -= 20
+        explanation_parts.append("High social trust score reduced the risk.")
     elif social_score < 40:
         score += 20
+        explanation_parts.append("Low social trust score increased the risk.")
+    else:
+        explanation_parts.append("Average social trust score had neutral impact.")
 
     score = max(0, min(100, score))
 
@@ -34,7 +45,8 @@ def calculate_risk_score(purchase_amount, past_fraud_reports, social_score):
     return {
         "score": score,
         "grade": grade,
-        "decision": decision
+        "decision": decision,
+        "explanation": " ".join(explanation_parts)
     }
 
 @app.route("/risk", methods=["POST"])
