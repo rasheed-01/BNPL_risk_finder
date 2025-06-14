@@ -121,15 +121,5 @@ Mohammed Abdul Rasheed
 * BNPL fraud sandbox for regulators
 * University hackathons on ethical credit
 
----
+--
 
-## 📬 License
-
-MIT – feel free to fork, improve, and scale!
-
-```
-
----
-
-Let me know if you'd like a **screenshots section**, **live demo badge**, or a **Notion-style pitch deck** to go along with this.
-```
